@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name:
+
+  security:
+    user:
+      name: bobt
+      password: testpi4j
+server:
+  port: 9443
+#  ssl:
+#    key-store: /usr/local/apps/versatune/conf/versatune.p12
+#    key-store-password: changeMe
+#    key-store-type: pkcs12
+#    key-alias: versatune
+#    key-password: changeMe
+#    enabled: true
+  servlet:
+    context-path: /

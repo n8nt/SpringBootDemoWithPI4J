@@ -1,0 +1,78 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.1)
+
+2023-01-21T17:20:06.159Z  INFO 11831 --- [           main] c.t.demoforpi4j.DemoForPi4JApplication   : Starting DemoForPi4JApplication v0.0.1-SNAPSHOT using Java 17.0.4 with PID 11831 (/usr/local/apps/versatune/DemoForPI4J-0.0.1-SNAPSHOT.jar started by root in /usr/local/apps/versatune)
+2023-01-21T17:20:06.182Z  INFO 11831 --- [           main] c.t.demoforpi4j.DemoForPi4JApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-01-21T17:20:13.342Z  INFO 11831 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9443 (http)
+2023-01-21T17:20:13.429Z  INFO 11831 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-21T17:20:13.430Z  INFO 11831 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
+2023-01-21T17:20:13.974Z  INFO 11831 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-21T17:20:13.987Z  INFO 11831 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7400 ms
+2023-01-21T17:20:14.520Z  INFO 11831 --- [           main] com.pi4j.Pi4J                            : New auto context
+2023-01-21T17:20:14.521Z  INFO 11831 --- [           main] com.pi4j.Pi4J                            : New context builder
+2023-01-21T17:20:15.168Z  INFO 11831 --- [           main] c.p.p.impl.DefaultRuntimePlatforms       : adding platform to managed platform map [id=raspberrypi; name=RaspberryPi Platform; priority=5; class=com.pi4j.plugin.raspberrypi.platform.RaspberryPiPlatform]
+2023-01-21T17:20:15.185Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : --------------------
+2023-01-21T17:20:15.186Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : |  Pi4J PLATFORMS  |
+2023-01-21T17:20:15.186Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : --------------------
+2023-01-21T17:20:15.186Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+PLATFORMS: [1] "Pi4J Runtime Platforms" <com.pi4j.platform.impl.DefaultPlatforms> 
+└─PLATFORM: "RaspberryPi Platform" {raspberrypi} <com.pi4j.plugin.raspberrypi.platform.RaspberryPiPlatform> {Pi4J Platform for the RaspberryPi series of products.} 
+2023-01-21T17:20:15.196Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+2023-01-21T17:20:15.196Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : ---------------------------
+2023-01-21T17:20:15.197Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : |  Pi4J DEFAULT PLATFORM  |
+2023-01-21T17:20:15.197Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : ---------------------------
+2023-01-21T17:20:15.197Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+PLATFORM: "RaspberryPi Platform" {raspberrypi} <com.pi4j.plugin.raspberrypi.platform.RaspberryPiPlatform> {Pi4J Platform for the RaspberryPi series of products.} 
+2023-01-21T17:20:15.199Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+2023-01-21T17:20:15.199Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : --------------------
+2023-01-21T17:20:15.199Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : |  Pi4J PROVIDERS  |
+2023-01-21T17:20:15.200Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : --------------------
+2023-01-21T17:20:15.200Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+PROVIDERS: [6] "I/O Providers" <com.pi4j.provider.impl.DefaultProviders> 
+├─DIGITAL_INPUT: [1] <com.pi4j.io.gpio.digital.DigitalInputProvider> 
+│ └─PROVIDER: "RaspberryPi Digital Input (GPIO) Provider" {raspberrypi-digital-input} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalInputProviderImpl> {com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalInputProviderImpl} 
+├─SERIAL: [1] <com.pi4j.io.serial.SerialProvider> 
+│ └─PROVIDER: "RaspberryPi Serial Provider" {raspberrypi-serial} <com.pi4j.plugin.raspberrypi.provider.serial.RpiSerialProviderImpl> {com.pi4j.plugin.raspberrypi.provider.serial.RpiSerialProviderImpl} 
+├─ANALOG_OUTPUT: [0] <com.pi4j.io.gpio.analog.AnalogOutputProvider> 
+├─PWM: [1] <com.pi4j.io.pwm.PwmProvider> 
+│ └─PROVIDER: "RaspberryPi PWM Provider" {raspberrypi-pwm} <com.pi4j.plugin.raspberrypi.provider.pwm.RpiPwmProviderImpl> {com.pi4j.plugin.raspberrypi.provider.pwm.RpiPwmProviderImpl} 
+├─DIGITAL_OUTPUT: [1] <com.pi4j.io.gpio.digital.DigitalOutputProvider> 
+│ └─PROVIDER: "RaspberryPi Digital Output (GPIO) Provider" {raspberrypi-digital-output} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutputProviderImpl> {com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutputProviderImpl} 
+├─SPI: [1] <com.pi4j.io.spi.SpiProvider> 
+│ └─PROVIDER: "RaspberryPi SPI Provider" {raspberrypi-spi} <com.pi4j.plugin.raspberrypi.provider.spi.RpiSpiProviderImpl> {com.pi4j.plugin.raspberrypi.provider.spi.RpiSpiProviderImpl} 
+├─ANALOG_INPUT: [0] <com.pi4j.io.gpio.analog.AnalogInputProvider> 
+└─I2C: [1] <com.pi4j.io.i2c.I2CProvider> 
+  └─PROVIDER: "RaspberryPi I2C Provider" {raspberrypi-i2c} <com.pi4j.plugin.raspberrypi.provider.i2c.RpiI2CProviderImpl> {com.pi4j.plugin.raspberrypi.provider.i2c.RpiI2CProviderImpl} 
+2023-01-21T17:20:15.226Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+2023-01-21T17:20:15.341Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : -------------------
+2023-01-21T17:20:15.341Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : |  Pi4J REGISTRY  |
+2023-01-21T17:20:15.342Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : -------------------
+2023-01-21T17:20:15.342Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+REGISTRY: [6] "I/O Registered Instances" <com.pi4j.registry.impl.DefaultRegistry> 
+├─IO: "ChannelBit2" {PIN_OUT_CHANNEL2} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutput> {DOUT-6} 
+├─IO: "SignalLock" {PIN_OUT_SIGNAL_LOCK} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutput> {DOUT-13} 
+├─IO: "ChannelBit1" {PIN_OUT_CHANNEL1} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutput> {DOUT-26} 
+├─IO: "ChannelBit4" {PIN_OUT_CHANNEL4} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalOutput> {DOUT-12} 
+├─IO: "freeze input" {freeze} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalInput> {DIN-19} 
+└─IO: "ShutDown Signal" {shutdown} <com.pi4j.plugin.raspberrypi.provider.gpio.digital.RpiDigitalInput> {DIN-14} 
+2023-01-21T17:20:15.351Z  INFO 11831 --- [           main] com.pi4j.util.Console                    : 
+2023-01-21T17:20:16.352Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : SIGNAL LOCK LOW.
+2023-01-21T17:20:16.354Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN1 OFF.
+2023-01-21T17:20:16.354Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN2 OFF.
+2023-01-21T17:20:16.355Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN4 OFF.
+2023-01-21T17:20:17.356Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : SIGNAL LOCK ON.
+2023-01-21T17:20:17.357Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN1 ON.
+2023-01-21T17:20:17.358Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN2 ON.
+2023-01-21T17:20:17.359Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : CHAN4 ON.
+2023-01-21T17:20:18.360Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : PI4J initialization completed.
+2023-01-21T17:20:18.361Z  INFO 11831 --- [           main] c.t.demoforpi4j.pi4j.Pi4jMinimalBT       : Pi4jMinimalBT() up and running.
+2023-01-21T17:20:20.040Z  INFO 11831 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6ee0bc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a617, org.springframework.security.web.context.SecurityContextHolderFilter@168a49c, org.springframework.security.web.header.HeaderWriterFilter@2ee2d0, org.springframework.security.web.authentication.logout.LogoutFilter@1b325b3, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@102e036, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1868320, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@20be82, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7f77a5, org.springframework.security.web.session.SessionManagementFilter@1770e40, org.springframework.security.web.access.ExceptionTranslationFilter@1d712e8, org.springframework.security.web.access.intercept.AuthorizationFilter@1abf713]
+2023-01-21T17:20:20.085Z  INFO 11831 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@17632cf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b68ec6, org.springframework.security.web.context.SecurityContextHolderFilter@12c728, org.springframework.security.web.header.HeaderWriterFilter@12485dd, org.springframework.security.web.csrf.CsrfFilter@1bd54f7, org.springframework.security.web.authentication.logout.LogoutFilter@1652c98, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@12fc69e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1ab3a71, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5bfdfc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@171adc2, org.springframework.security.web.access.ExceptionTranslationFilter@15f8707, org.springframework.security.web.access.intercept.AuthorizationFilter@b85ba1]
+2023-01-21T17:20:22.060Z  INFO 11831 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9443 (http) with context path ''
+2023-01-21T17:20:22.174Z  INFO 11831 --- [           main] c.t.demoforpi4j.DemoForPi4JApplication   : Started DemoForPi4JApplication in 19.43 seconds (process running for 22.354)

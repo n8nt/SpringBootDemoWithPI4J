@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan = "true" scanPeriod="30 seconds">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/usr/local/apps/versatune/logs/demoforpi4j.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>/usr/local/apps/versatune/logs/demoforpi4j-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="versatune" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/usr/local/apps/versatune/logs/demoforpi4j.log</file>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>/usr/local/apps/versatune/logs/demoforpi4j-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+<!--            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>-->
+            <Pattern>%d %p %C{1} [%t] %m%n</Pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="org.springframework.web.servlet" level="WARN" additivity="false">
+        <appender-ref ref="versatune" />
+    </logger>
+    <logger name="com.tournoux" level="INFO" >
+        <appender-ref ref="versatune"/>
+    </logger>
+
+    <logger name="org.springframework.boot" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="org.apache" level="WARN" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <logger name="web" level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+
+</configuration>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
+<!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
+<!--<springProfile name="dev,staging">-->
+<!--    <logger name="guru.springframework.controllers" level="DEBUG" additivity="false">-->
+<!--        <appender-ref ref="CONSOLE" />-->
+<!--    </logger>>-->
+<!--</springProfile>-->
+<!--<springProfile name="production">-->
+<!--    <logger name="guru.springframework.controllers" level="WARN" additivity="false">-->
+<!--        <appender-ref ref="FILE" />-->
+<!--    </logger>-->
+<!--</springProfile>-->
+<!--</configuration>-->
