@@ -17,7 +17,7 @@ only returns the raspberrypi-output-provider. How do I make that available?
 ## Project Code Description
 
 This project sets up 4 of the GPIO pins as outputs. I created a Spring Component class that acts as a service that
-handles all of the GPIO.
+handles all GPIO.
 
 When the class is initialized I have the constructor create the pi4j context and have the constructor initialize the
 pins I will be using. The input and output pins that I will be using in my real project are included in this
@@ -45,12 +45,17 @@ it do my Raspberry PI.
 ## Running the application
 
 To run this you will need Java 17 installed.
-This is what I did.
+I copied the jar file to a directory on the raspberry pi. I use the IntelliJ IDE so I can also remotely debug the application.
+I use the following command to debug remotely. This command starts up the application and will place the logging in a file named demoOutput.
 
-sudo /usr/bin/java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
-${APP_DIR}/DemoForPI4J-0.0.1-SNAPSHOT.jar > ${APP_DIR}/logs/Application.log 2>&1
-
+```
+cd /home/pi
+sudo -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 DemoForPI4J-0.0.1-SNAPSHOT.jar > demoOutput.log &
+```
+To start it up without the debugger (probably the normal method)
+```
 sudo java -jar DemoForPI4J-0.0.1-SNAPSHOT.jar &
+```
 
 ## the circuit
 
