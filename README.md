@@ -33,6 +33,16 @@ I also created a rest controller with endpoint named /blinkLeds/{loopcount} wher
 in as user named demo and password named testpi4j. Once logged in the endpoint will ask the service to turn all 4
 outputs on, then off and pause one second between each change.
 
+To test the blinkLeds endpoint first connect your raspberrypi to the internet. Find your pi's IP address then type the following into a browser:
+
+https://192.168.1.8:9443/blinkLeds/10
+
+(my pi's IP address is 192.168.1.8) and note that the port I use is 9443. That can be changed in the program if you need to. It
+is in the application.yml - as is the user name and password.
+
+You will be asked to login. The user is demo and the password is testpi4j
+
+
 When watching the log, it can be seen that all outputs "appear" to be doing as commanded, yet when looking at the led's
 nothing is happening.
 
