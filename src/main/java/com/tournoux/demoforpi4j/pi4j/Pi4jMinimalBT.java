@@ -9,6 +9,7 @@ import com.pi4j.io.gpio.digital.DigitalOutput;
 import com.pi4j.io.gpio.digital.DigitalState;
 import com.pi4j.io.gpio.digital.PullResistance;
 import com.pi4j.util.Console;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.Getter;
 import lombok.Setter;
@@ -73,27 +74,9 @@ public class Pi4jMinimalBT {
 
     }
 
-//    @PostConstruct
-//    private void postConstruct() {
-//        try{
-//            pi4j = Pi4J.newAutoContext();
-//            //initializeGpios();
-//            initializeService();
-//            logger.info("PI4J initialization completed.");
-//        }catch(Exception e){
-//            logger.error("Whoops... PI4J initialization failed.",e);
-//        }
-//    }
-
-
-    private Console console;
-    @Autowired
-    PrintInfo printInfo;
-
-
-
-    public Pi4jMinimalBT( ){
-       //this.printInfo = printInfo;
+    @PostConstruct
+    private void postConstruct() {
+        //this.printInfo = printInfo;
         try{
             pi4j = Pi4J.newAutoContext();
             console = new Console();
@@ -131,6 +114,52 @@ public class Pi4jMinimalBT {
         logger.info("Pi4jMinimalBT() up and running.");
     }
 
+
+    private Console console;
+    @Autowired
+    PrintInfo printInfo;
+
+
+
+    public Pi4jMinimalBT( ){
+//       //this.printInfo = printInfo;
+//        try{
+//            pi4j = Pi4J.newAutoContext();
+//            console = new Console();
+//
+//            printInfo.printLoadedPlatforms(console, pi4j);
+//            printInfo.printDefaultPlatform(console, pi4j);
+//            printInfo.printProviders(console, pi4j);
+//
+//            initializeService();
+//            printInfo.printRegistry(console, pi4j);
+//
+//
+//
+//            // just for grins, let's toggle the outputs and see if we get anything.
+//            TurnLockOn();
+//            TurnChan1On();
+//            TurnChan2On();
+//            TurnChan4On();
+//            Thread.sleep(1000L);
+//            TurnLockOff();
+//            TurnChan1Off();
+//            TurnChan2Off();
+//            TurnChan4Off();
+//            Thread.sleep(1000L);
+//            TurnLockOn();
+//            TurnChan1On();
+//            TurnChan2On();
+//            TurnChan4On();
+//            Thread.sleep(1000L);
+//
+//            logger.info("PI4J initialization completed.");
+//        }catch(Exception e){
+//            logger.error("Whoops... PI4J initialization failed.",e);
+//        }
+//        logger.info("Pi4jMinimalBT() up and running.");
+    }
+
     private void initializeService(){
 
 
@@ -159,7 +188,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL1)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("raspberrypi-digital-output");
+                .provider("pigpio-digital-output");
         channelBit1 = pi4j.create(ledConfig);
         if (channelBit1.equals(DigitalState.LOW))
             channelBit1.high();
@@ -172,7 +201,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL2)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("raspberrypi-digital-output");
+                .provider("pigpio-digital-output");
         channelBit2 = pi4j.create(ledConfig);
         if (channelBit2.equals(DigitalState.LOW))
             channelBit2.high();
@@ -186,7 +215,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL4)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("raspberrypi-digital-output");
+                .provider("pigpio-digital-output");
         channelBit4 = pi4j.create(ledConfig);
 
         if (channelBit4.equals(DigitalState.LOW))
@@ -200,7 +229,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_SIGNAL_LOCK)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("raspberrypi-digital-output");
+                .provider("pigpio-digital-output");
         signalLock = pi4j.create(ledConfig);
         if (signalLock.equals(DigitalState.LOW))
             signalLock.high();
@@ -213,7 +242,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_IN_SHUTDOWN)
                 .pull(PullResistance.PULL_UP)
                 .debounce(3000L)
-                .provider("raspberrypi-digital-input");
+                .provider("pigpio-digital-input");
         shutdown = pi4j.create(buttonConfig);
         shutdown.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
