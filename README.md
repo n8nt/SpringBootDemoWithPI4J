@@ -106,3 +106,17 @@ REGISTRY: [6] "I/O Registered Instances" <com.pi4j.registry.impl.DefaultRegistry
 All of this looks good. The only problem is that in other examples shown, the default provider is always shown to be
 pigpio-output-provider and those are shown to work by the example, but when using the raspberrypi-output-provider the
 code does not seem to work.
+
+## update 2023JAN22
+I see in several of the examples the following:
+
+- RUNTIME DEPENDENCIES
+- This project used Pi4J V.2 which has the following runtime dependency requirements:
+
+- SLF4J (API)
+- SLF4J-SIMPLE
+- PIGPIO Library (for the Raspberry Pi) - This dependency comes pre-installed on recent Raspbian images. However, you can also download and install it yourself using the instructions found here. (A minimum version of 71 is recommended at the time of this writing)
+
+I created a new SSD card and loaded the Raspberry PI OS Lite (32-bit). I also tried the 64-bit version but so far have the same results. The above says this dependency comes pre-installed on recent Raspbian images. Question is, is it included in those two OS's? (I use the Raspberry PI Imager v1.7.3 to download and install OS images.) 
+
+Is it necessary to start up the pigpiod in order to get the pi4j library to work?
