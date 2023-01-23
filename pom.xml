@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tournoux</groupId>
     <artifactId>DemoForPI4J</artifactId>
-    <version>1.0.0T</version>
+    <version>1.0.0.1</version>
     <name>DemoForPI4J</name>
     <description>DemoForPI4J</description>
     <properties>
@@ -79,6 +79,14 @@
             <artifactId>jna</artifactId>
             <version>${jna.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+
 
     </dependencies>
 

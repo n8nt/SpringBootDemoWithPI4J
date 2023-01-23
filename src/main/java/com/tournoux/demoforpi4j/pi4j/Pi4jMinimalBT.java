@@ -60,6 +60,13 @@ public class Pi4jMinimalBT {
 
     private static Context pi4j;
 
+
+    private Console console;
+    @Autowired
+    PrintInfo printInfo;
+
+
+
     @PreDestroy
     public void destroy(){
         logger.info("Shutting down the GPIO service.");
@@ -74,10 +81,13 @@ public class Pi4jMinimalBT {
 
     }
 
+    /*
+            Wait until Spring has completed all configuraton then go ahead and create the
+            PI4J Context.
+     */
     @PostConstruct
     private void postConstruct() {
-        //this.printInfo = printInfo;
-        try{
+        try {
             pi4j = Pi4J.newAutoContext();
             console = new Console();
 
@@ -85,82 +95,15 @@ public class Pi4jMinimalBT {
             printInfo.printDefaultPlatform(console, pi4j);
             printInfo.printProviders(console, pi4j);
 
-            initializeService();
-            printInfo.printRegistry(console, pi4j);
-
-
-
-            // just for grins, let's toggle the outputs and see if we get anything.
-            TurnLockOn();
-            TurnChan1On();
-            TurnChan2On();
-            TurnChan4On();
-            Thread.sleep(1000L);
-            TurnLockOff();
-            TurnChan1Off();
-            TurnChan2Off();
-            TurnChan4Off();
-            Thread.sleep(1000L);
-            TurnLockOn();
-            TurnChan1On();
-            TurnChan2On();
-            TurnChan4On();
-            Thread.sleep(1000L);
-
-            logger.info("PI4J initialization completed.");
+            logger.info("PI4J context created.");
         }catch(Exception e){
-            logger.error("Whoops... PI4J initialization failed.",e);
+            logger.error("Could not create PI4J Context. ", e);
         }
-        logger.info("Pi4jMinimalBT() up and running.");
     }
 
 
-    private Console console;
-    @Autowired
-    PrintInfo printInfo;
 
-
-
-    public Pi4jMinimalBT( ){
-//       //this.printInfo = printInfo;
-//        try{
-//            pi4j = Pi4J.newAutoContext();
-//            console = new Console();
-//
-//            printInfo.printLoadedPlatforms(console, pi4j);
-//            printInfo.printDefaultPlatform(console, pi4j);
-//            printInfo.printProviders(console, pi4j);
-//
-//            initializeService();
-//            printInfo.printRegistry(console, pi4j);
-//
-//
-//
-//            // just for grins, let's toggle the outputs and see if we get anything.
-//            TurnLockOn();
-//            TurnChan1On();
-//            TurnChan2On();
-//            TurnChan4On();
-//            Thread.sleep(1000L);
-//            TurnLockOff();
-//            TurnChan1Off();
-//            TurnChan2Off();
-//            TurnChan4Off();
-//            Thread.sleep(1000L);
-//            TurnLockOn();
-//            TurnChan1On();
-//            TurnChan2On();
-//            TurnChan4On();
-//            Thread.sleep(1000L);
-//
-//            logger.info("PI4J initialization completed.");
-//        }catch(Exception e){
-//            logger.error("Whoops... PI4J initialization failed.",e);
-//        }
-//        logger.info("Pi4jMinimalBT() up and running.");
-    }
-
-    private void initializeService(){
+    public void initializeService(){
 
 
         // initialize freeze input.
@@ -172,7 +115,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_IN_FREEZE)
                 .pull(PullResistance.PULL_UP)
                 .debounce(3000L)
-                .provider("raspberrypi-digital-input");
+                .provider("pigpio-digital-input");
         freeze = pi4j.create(buttonConfig);
         freeze.addListener(e -> {
             if (e.state() == DigitalState.LOW) {

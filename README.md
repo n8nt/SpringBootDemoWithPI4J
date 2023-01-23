@@ -66,6 +66,13 @@ To start it up without the debugger (probably the normal method)
 ```
 sudo java -jar DemoForPI4J-0.0.1-SNAPSHOT.jar &
 ```
+I finally got it all to work. See note at bottom. I had to start it up like this:
+
+```
+sudo java -cp /usr/local/apps/pi4j/pi4j-2.2.1 -jar DemoForPI4J-0.0.1.jar &
+
+```
+
 
 ## the circuit
 
@@ -120,3 +127,47 @@ I see in several of the examples the following:
 I created a new SSD card and loaded the Raspberry PI OS Lite (32-bit). I also tried the 64-bit version but so far have the same results. The above says this dependency comes pre-installed on recent Raspbian images. Question is, is it included in those two OS's? (I use the Raspberry PI Imager v1.7.3 to download and install OS images.) 
 
 Is it necessary to start up the pigpiod in order to get the pi4j library to work?
+
+## update 2023JAN22-1124pm
+
+Finally. I got this to work after pulling in one more dependency for the JNA. I need to do a re-check, but I'm pretty sure that all that was necessary was to l included the following dependency:
+
+```
+        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+```
+
+I already had a dependency included for the jna library. I got the latest version from MAVEN which
+was 5.13.0.
+
+
+```
+        <!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+```
+I also had to skip the tests when I compiled on my windows desktop with IntelliJ. That's because when maven builds the application
+it runs the tests so it will fail because it cannot find the correct OS TYPE. I'm still not sure I need the pigpiod so my next test
+will be to create a new blank OS SD card and repopulate it with only the files needed for this particular project.
+
+## update 2023JAN2300:43
+
+I was wrong. That extra jna platform had nothing to do with the problem. Rather, it was the fact that I needed to specify
+the path of the pi4j/pi4j-2.2.1 directory where I downloaded the latest version of PI4J.
+I feel it is not documented well as to how to do that but I probably didn't read it correctly.
+
+What I ended up doing was to change my startup command to
+
+```
+sudo java -cp /usr/local/apps/pi4j/pi4j-2.2.1 -jar DemoForPI4J-0.0.1.jar &
+
+```
+
+Now it all works perfectly.
