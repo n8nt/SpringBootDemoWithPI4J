@@ -18,3 +18,8 @@ server:
 #    enabled: true
   servlet:
     context-path: /
+
+# For some reason the @Value annontation does not work for the Pi4jMinimalBT class
+pi4j:
+  inputprovider: pigpio-digital-input
+  outputprovider: pigpio-digital-output

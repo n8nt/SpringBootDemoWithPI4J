@@ -1,7 +1,6 @@
 package com.tournoux.demoforpi4j.pi4j;
 
 
-
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalInput;
@@ -66,6 +65,14 @@ public class Pi4jMinimalBT {
     PrintInfo printInfo;
 
 
+    /*
+            I tried using raspberrypi-digital-input and raspberrypi-digital-output
+            but they did nothing. Probably these are not yet implmeneted in pi4j-2.2.1
+     */
+    private final String inputProvider = "pigpio-digital-input";
+    private final String outputProvider = "pigpio-digital-output";
+
+
 
     @PreDestroy
     public void destroy(){
@@ -101,11 +108,24 @@ public class Pi4jMinimalBT {
         }
     }
 
+    /*
+            Tried using @Value to be able to configure the input and output digital providers
+            but got exceptions when doing that so have removed. This will probably mean that
+            we cannot run tests when building this on windows.
+     */
+//    public Pi4jMinimalBT(@Value("${pi4j.inputprovider}") final String inputProvider,
+//                         @Value("${pi4j.outputprovider}")final String outputProvider){
+//        this.inputProvider = inputProvider;
+//        this.outputProvider = outputProvider;
+//
+//    }
+
 
 
     public void initializeService(){
 
 
+        // print out the providers that we are using
         // initialize freeze input.
         // We'll add a listener so that when the signal is received it can send
         // a web request to our waiting signal controller endpoint.
@@ -115,7 +135,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_IN_FREEZE)
                 .pull(PullResistance.PULL_UP)
                 .debounce(3000L)
-                .provider("pigpio-digital-input");
+                .provider(inputProvider);
         freeze = pi4j.create(buttonConfig);
         freeze.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
@@ -131,7 +151,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL1)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
+                .provider(outputProvider);
         channelBit1 = pi4j.create(ledConfig);
         if (channelBit1.equals(DigitalState.LOW))
             channelBit1.high();
@@ -144,7 +164,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL2)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
+                .provider(outputProvider);
         channelBit2 = pi4j.create(ledConfig);
         if (channelBit2.equals(DigitalState.LOW))
             channelBit2.high();
@@ -158,7 +178,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_CHANNEL4)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
+                .provider(outputProvider);
         channelBit4 = pi4j.create(ledConfig);
 
         if (channelBit4.equals(DigitalState.LOW))
@@ -172,7 +192,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_OUT_SIGNAL_LOCK)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
+                .provider(outputProvider);
         signalLock = pi4j.create(ledConfig);
         if (signalLock.equals(DigitalState.LOW))
             signalLock.high();
@@ -185,7 +205,7 @@ public class Pi4jMinimalBT {
                 .address(PIN_IN_SHUTDOWN)
                 .pull(PullResistance.PULL_UP)
                 .debounce(3000L)
-                .provider("pigpio-digital-input");
+                .provider(inputProvider);
         shutdown = pi4j.create(buttonConfig);
         shutdown.addListener(e -> {
             if (e.state() == DigitalState.LOW) {
@@ -195,6 +215,11 @@ public class Pi4jMinimalBT {
             }
         });
 
+        console = new Console();
+        logger.info("Printing out the registry for GPIO.");
+
+        printInfo.printRegistry(console, pi4j);
+        logger.info("Initialization complete.");
     }
 
     public boolean TurnLockOn(){

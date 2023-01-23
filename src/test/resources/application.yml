@@ -18,3 +18,7 @@ server:
 #    enabled: true
   servlet:
     context-path: /
+
+pi4j:
+  inputprovider: raspberrypi-digital-input
+  outputprovider: raspberrypi-digital-output
